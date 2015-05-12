@@ -21,6 +21,7 @@
   "dependencies": {
     "requirejs": "~2.1.17",
     "bootstrap": "~3.3.4",
-    "handlebars": "~3.0.3"
+    "handlebars": "~3.0.3",
+    "d3": "~3.5.5"
   }
 }
