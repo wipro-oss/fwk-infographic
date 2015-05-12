@@ -1,4 +1,5 @@
 define(function() {
+  var soLink = 'https://api.stackexchange.com/2.2/tags?pagesize=1&order=desc&sort=popular&inname=hoodie&site=stackoverflow';
   return [
     ['tech-trigger', 'Hood.ie', 'http://hood.ie/', 'https://github.com/hoodiehq/hoodie.js'],
     ['tech-trigger', 'Koa', 'http://koajs.com/', 'https://github.com/koajs/koa'],

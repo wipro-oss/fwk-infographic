@@ -34,7 +34,7 @@
           <legend class="text-capitalize">{{groupName}}</legend>
           <ul>
           {{#each frameworks}}
-          <li><a href="{{link}}">{{name}}</a></li>
+          <li><a href="{{link}}">{{name}}</a>{{#if stars}}&nbsp;<small><span class="glyphicon glyphicon-star alert-warning" aria-hidden="true"></span> {{stars}}</small>{{/if}}</li>
           {{/each}}
           </ul>
         </fieldset>
