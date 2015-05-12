@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Web frameworks infographic</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="app/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <header class="container">
+      <h1>Infographic</h1>
+      <p class="lead">Web frameworks infographic</p>
+    </header>
+    <div class="container">
+
+
+      <div class="row">
+        <div class="col-sm-6">
+          <section id="page"></section>
+        </div><!-- /.row -->
+      </div><!-- /.container -->
+
+      <script data-main="app/main.js" src="app/vendor/requirejs/require.js"></script>
+      <script id="grp-tmpl" type="text/x-handlebars-template">
+        <fieldset>
+          <legend class="text-capitalize">{{groupName}}</legend>
+          <ul>
+          {{#each frameworks}}
+          <li><a href="{{link}}">{{name}}</a></li>
+          {{/each}}
+          </ul>
+        </fieldset>
+      </script>
+  </body>
+</html>

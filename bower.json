@@ -1,0 +1,26 @@
+{
+  "name": "fwk-infographic",
+  "version": "1.0.0",
+  "authors": [
+    "shyam <shyamsundar.shanmugam@wipro.com>"
+  ],
+  "description": "Web frameworks infographic",
+  "main": "index.html",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "lib/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.17",
+    "bootstrap": "~3.3.4",
+    "handlebars": "~3.0.3"
+  }
+}
