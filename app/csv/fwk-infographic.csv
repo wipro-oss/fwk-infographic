@@ -1,35 +1,35 @@
 bucket,name,link,srcUrl,stars,forks,commits,releases,contributors,openIssues,stackoverflowQuestions,language,description
-tech-trigger,hoodie.js,http://hood.ie/,https://github.com/hoodiehq/hoodie.js,1634,100,1749,82,,63,5,JavaScript,hoodie super power to the frontend!
-tech-trigger,koa,http://koajs.com/,https://github.com/koajs/koa,6169,434,664,38,59,9,137,JavaScript,Expressive middleware for node.js using generators
-tech-trigger,meteor,http://meteor.com/,https://github.com/meteor/meteor,24925,2808,14181,581,202,576,11784,JavaScript,"Meteor, an ultra-simple, database-everywhere, data-on-the-wire, pure-Javascript web framework."
-tech-trigger,derby,http://derbyjs.com/,https://github.com/derbyjs/derby,3711,202,1652,116,24,46,85,JavaScript,"MVC framework making it easy to write realtime, collaborative applications that run in both Node.js and browsers"
-inflated-expectations,flux,https://facebook.github.io/flux/,http://github.com/facebook/flux,6144,1084,220,2,60,37,264,JavaScript,Application Architecture for Building User Interfaces
-inflated-expectations,react,https://facebook.github.io/react/,https://github.com/facebook/react,21998,3107,4391,27,405,540,2962,JavaScript,"A declarative, efficient, and flexible JavaScript library for building user interfaces."
-inflated-expectations,spring-boot,http://projects.spring.io/spring-boot/,http://github.com/spring-projects/spring-boot,2098,2051,4519,39,145,423,0,Java,Spring Boot
-inflated-expectations,foam,http://foam-framework.github.io/foam/,https://github.com/foam-framework/foam,673,39,8801,32,10,113,0,JavaScript,Feature-Oriented Active Modeller
-inflated-expectations,framework,http://aurelia.io/,https://github.com/aurelia/framework,2821,118,102,23,10,28,882,JavaScript,The aurelia framework brings together all the required core aurelia libraries into a ready-to-go application-building platform.
-inflated-expectations,mithril.js,https://lhorie.github.io/mithril/,http://github.com/lhorie/mithril.js,3450,268,1015,33,68,32,32,JavaScript,A Javascript Framework for Building Brilliant Applications (development repo)
-inflated-expectations,dropwizard,http://www.dropwizard.io/,https://github.com/dropwizard/dropwizard,3286,1356,2957,51,175,43,549,Java,A damn simple library for building production-ready RESTful web services.
-disillusionment-trough,express,http://expressjs.com/,https://github.com/strongloop/express,18846,3772,5099,248,178,71,14847,JavaScript,"Fast, unopinionated, minimalist web framework for node."
-disillusionment-trough,wicket,http://wicket.apache.org/,https://github.com/apache/wicket,256,152,18622,222,31,6,3072,Java,Mirror of Apache Wicket
-disillusionment-trough,parent,http://seamframework.org/,https://github.com/seam/parent,12,10,166,16,,0,1718,,Seam Parent POM
-enlightenment-slope,stripes,https://stripesframework.atlassian.net/wiki/display/STRIPES/Home,https://github.com/StripesFramework/stripes,65,27,1063,31,13,5,260,Java,"Stripes is a Java framework with the goal of making Servlet/JSP based web development in Java as easy, intuitive and straight-forward as it should be. It's stripey and it doesn't suck."
-enlightenment-slope,laravel,http://laravel.com/,https://github.com/laravel/laravel,16351,5258,4424,51,269,26,36014,PHP,A PHP Framework For Web Artisans
-enlightenment-slope,knockout,http://knockoutjs.com/,https://github.com/knockout/knockout,6378,1097,1364,35,56,233,14540,JavaScript,"Knockout makes it easier to create rich, responsive UIs with JavaScript"
-enlightenment-slope,flight,https://flightjs.github.io/,https://github.com/flightjs/flight,6043,548,494,21,53,14,18,JavaScript,"A component-based, event-driven JavaScript framework from Twitter"
-enlightenment-slope,ember.js,http://emberjs.com/,https://github.com/emberjs/ember.js,13743,2930,9690,117,489,449,20086,JavaScript,Ember.js - A JavaScript framework for creating ambitious web applications
-enlightenment-slope,angular.js,http://angularjs.org/,https://github.com/angular/angular.js,38567,16280,6748,138,1235,1236,109092,JavaScript,HTML enhanced for web apps
-enlightenment-slope,netty,http://netty.io/,https://github.com/netty/netty,4608,2261,6706,123,151,276,22903,Java,Netty project - an event-driven asynchronous network application framework
-enlightenment-slope,grails-core,http://grails.org/,https://github.com/grails/grails-core,1323,638,15948,85,153,102,23095,Java,The Grails Web Application Framework
-enlightenment-slope,gwt,http://www.gwtproject.org/,https://github.com/gwtproject/gwt,324,70,8440,57,54,0,18631,Java,GWT Open Source Project
-productivity-plateau,playframework,http://playframework.com/,https://github.com/playframework/playframework,6246,2200,6234,84,419,189,17740,Scala,Play Framework
-productivity-plateau,backbone,http://backbonejs.org/,https://github.com/jashkenas/backbone,21773,4847,2966,22,259,16,20013,JavaScript,"Give your JS App some Backbone with Models, Views, Collections, and Events"
-productivity-plateau,yui3,http://yuilibrary.com/,https://github.com/yui/yui3,2966,1006,25381,79,139,397,2067,JavaScript,A library for building richly interactive web applications.
-productivity-plateau,dojo,https://dojotoolkit.org/,https://github.com/dojo/dojo,559,327,3754,165,69,24,7823,JavaScript,The Dojo Toolkit core library. Please submit bugs to https://bugs.dojotoolkit.org/
-productivity-plateau,extjs,http://www.sencha.com/products/extjs/#overview,http://www.sencha.com/products/extjs/evaluate/,,,,,,,27917,,
-productivity-plateau,jquery,http://jquery.com/,https://github.com/jquery/jquery,34417,8391,5826,127,225,101,611459,JavaScript,jQuery JavaScript Library
-productivity-plateau,struts,http://struts.apache.org/,https://github.com/apache/struts,186,198,3935,70,11,6,13460,Java,Mirror of Apache Struts
-productivity-plateau,spring-framework,http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html,https://github.com/spring-projects/spring-framework,5612,4716,10290,69,117,80,25752,Java,The Spring Framework
-productivity-plateau,Mvc,http://www.asp.net/,https://github.com/aspnet/Mvc,1723,573,1734,7,53,199,450222,C#,"Model view controller framework for building dynamic web sites with clean separation of concerns, including the merged MVC, Web API, and Web Pages w/ Razor."
-productivity-plateau,django,https://www.djangoproject.com/,https://github.com/django/django,14245,5663,20580,107,866,76,95006,Python,The Web framework for perfectionists with deadlines.
-productivity-plateau,rails,http://rubyonrails.org/,https://github.com/rails/rails,26118,10356,51229,259,2708,789,291344,Ruby,Ruby on Rails
+tech-trigger,Hood.ie,http://hood.ie/,https://github.com/hoodiehq/hoodie.js,1634,100,1749,82,,63,5,JavaScript,hoodie super power to the frontend!
+tech-trigger,Koa,http://koajs.com/,https://github.com/koajs/koa,6169,434,664,38,59,9,137,JavaScript,Expressive middleware for node.js using generators
+tech-trigger,Meteor,http://meteor.com/,https://github.com/meteor/meteor,24925,2808,14181,581,202,576,11784,JavaScript,"Meteor, an ultra-simple, database-everywhere, data-on-the-wire, pure-Javascript web framework."
+tech-trigger,Derby.js,http://derbyjs.com/,https://github.com/derbyjs/derby,3711,202,1652,116,24,46,85,JavaScript,"MVC framework making it easy to write realtime, collaborative applications that run in both Node.js and browsers"
+inflated-expectations,ReactJS-Flux,https://facebook.github.io/flux/,http://github.com/facebook/flux,6144,1084,220,2,60,37,264,JavaScript,Application Architecture for Building User Interfaces
+inflated-expectations,ReactJS,https://facebook.github.io/react/,https://github.com/facebook/react,21998,3107,4391,27,405,540,2962,JavaScript,"A declarative, efficient, and flexible JavaScript library for building user interfaces."
+inflated-expectations,Spring Boot,http://projects.spring.io/spring-boot/,http://github.com/spring-projects/spring-boot,2098,2051,4519,39,145,423,0,Java,Spring Boot
+inflated-expectations,FOAM,http://foam-framework.github.io/foam/,https://github.com/foam-framework/foam,673,39,8801,32,10,113,0,JavaScript,Feature-Oriented Active Modeller
+inflated-expectations,Aurelia,http://aurelia.io/,https://github.com/aurelia/framework,2821,118,102,23,10,28,882,JavaScript,The aurelia framework brings together all the required core aurelia libraries into a ready-to-go application-building platform.
+inflated-expectations,Mithril,https://lhorie.github.io/mithril/,http://github.com/lhorie/mithril.js,3450,268,1015,33,68,32,32,JavaScript,A Javascript Framework for Building Brilliant Applications (development repo)
+inflated-expectations,DropWizard,http://www.dropwizard.io/,https://github.com/dropwizard/dropwizard,3286,1356,2957,51,175,43,549,Java,A damn simple library for building production-ready RESTful web services.
+disillusionment-trough,ExpressJS,http://expressjs.com/,https://github.com/strongloop/express,18846,3772,5099,248,178,71,14847,JavaScript,"Fast, unopinionated, minimalist web framework for node."
+disillusionment-trough,Wicket,http://wicket.apache.org/,https://github.com/apache/wicket,256,152,18622,222,31,6,3072,Java,Mirror of Apache Wicket
+disillusionment-trough,Jboss Seam,http://seamframework.org/,https://github.com/seam/parent,12,10,166,16,,0,1718,,Seam Parent POM
+enlightenment-slope,Stripes,https://stripesframework.atlassian.net/wiki/display/STRIPES/Home,https://github.com/StripesFramework/stripes,65,27,1063,31,13,5,260,Java,"Stripes is a Java framework with the goal of making Servlet/JSP based web development in Java as easy, intuitive and straight-forward as it should be. It's stripey and it doesn't suck."
+enlightenment-slope,Laravel,http://laravel.com/,https://github.com/laravel/laravel,16351,5258,4424,51,269,26,36014,PHP,A PHP Framework For Web Artisans
+enlightenment-slope,KnockoutJS,http://knockoutjs.com/,https://github.com/knockout/knockout,6378,1097,1364,35,56,233,14540,JavaScript,"Knockout makes it easier to create rich, responsive UIs with JavaScript"
+enlightenment-slope,FlightJS,https://flightjs.github.io/,https://github.com/flightjs/flight,6043,548,494,21,53,14,18,JavaScript,"A component-based, event-driven JavaScript framework from Twitter"
+enlightenment-slope,EmberJS,http://emberjs.com/,https://github.com/emberjs/ember.js,13743,2930,9690,117,489,449,20086,JavaScript,Ember.js - A JavaScript framework for creating ambitious web applications
+enlightenment-slope,AngularJS,http://angularjs.org/,https://github.com/angular/angular.js,38567,16280,6748,138,1235,1236,109092,JavaScript,HTML enhanced for web apps
+enlightenment-slope,Netty,http://netty.io/,https://github.com/netty/netty,4608,2261,6706,123,151,276,22903,Java,Netty project - an event-driven asynchronous network application framework
+enlightenment-slope,Grails,http://grails.org/,https://github.com/grails/grails-core,1323,638,15948,85,153,102,23095,Java,The Grails Web Application Framework
+enlightenment-slope,GWT,http://www.gwtproject.org/,https://github.com/gwtproject/gwt,324,70,8440,57,54,0,18631,Java,GWT Open Source Project
+productivity-plateau,Play,http://playframework.com/,https://github.com/playframework/playframework,6246,2200,6234,84,419,189,17740,Scala,Play Framework
+productivity-plateau,BackboneJS,http://backbonejs.org/,https://github.com/jashkenas/backbone,21773,4847,2966,22,259,16,20013,JavaScript,"Give your JS App some Backbone with Models, Views, Collections, and Events"
+productivity-plateau,YUI,http://yuilibrary.com/,https://github.com/yui/yui3,2966,1006,25381,79,139,397,2067,JavaScript,A library for building richly interactive web applications.
+productivity-plateau,Dojo,https://dojotoolkit.org/,https://github.com/dojo/dojo,559,327,3754,165,69,24,7823,JavaScript,The Dojo Toolkit core library. Please submit bugs to https://bugs.dojotoolkit.org/
+productivity-plateau,ExtJS,http://www.sencha.com/products/extjs/#overview,http://www.sencha.com/products/extjs/evaluate/,,,,,,,27917,,
+productivity-plateau,jQuery,http://jquery.com/,https://github.com/jquery/jquery,34417,8391,5826,127,225,101,611459,JavaScript,jQuery JavaScript Library
+productivity-plateau,Struts,http://struts.apache.org/,https://github.com/apache/struts,186,198,3935,70,11,6,13460,Java,Mirror of Apache Struts
+productivity-plateau,Spring MVC,http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html,https://github.com/spring-projects/spring-framework,5612,4716,10290,69,117,80,25752,Java,The Spring Framework
+productivity-plateau,ASP.NET,http://www.asp.net/,https://github.com/aspnet/Mvc,1723,573,1734,7,53,199,450222,C#,"Model view controller framework for building dynamic web sites with clean separation of concerns, including the merged MVC, Web API, and Web Pages w/ Razor."
+productivity-plateau,Django,https://www.djangoproject.com/,https://github.com/django/django,14245,5663,20580,107,866,76,95006,Python,The Web framework for perfectionists with deadlines.
+productivity-plateau,Rails,http://rubyonrails.org/,https://github.com/rails/rails,26118,10356,51229,259,2708,789,291344,Ruby,Ruby on Rails
