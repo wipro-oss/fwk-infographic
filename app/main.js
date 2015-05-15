@@ -13,45 +13,37 @@ require.config({
   }
 });
 
-require(['jquery', 'bootstrap', './data', 'handlebars', 'd3'], function($, bootstrap, frameworks, Handlebars, d3) {
-  var m = {};
-  // get unique elements in order
-  var order = frameworks.map(function(r) {
-    return r[0]
-  }).filter(function(a,i,all) {
-    return i == 0 ? true : all[i-1] !== a;
-  });
-
-  frameworks.forEach(function(row) {
-    var a = m[row[0]] || [];
-    var fwk = {name: row[1], link: row[2], src: row[3]};
-    /*
-    if ( row[3].indexOf('github') != -1 ) {
-      var src = row[3].split('/');
-      var repo = src.pop(), user = src.pop();
-      $.get('https://api.github.com/repos/' + user + '/' + repo).done(function(data) {
-        fwk.stars = data.stargazers_count;
-        fwk.forks = data.forks_count;
-        fwk.openIssues = data.open_issues_count;
-        fwk.subscribers = data.subscribers_count;
-        render();
+require(['jquery', 'bootstrap', 'handlebars', 'd3'], function($, bootstrap, Handlebars, d3) {
+  d3.csv('app/csv/fwk-infographic.csv')
+    .get(function(err, rows) {
+      if ( err ) throw err;
+      var m = {};
+      // get unique elements in order
+      var order = rows.map(function(r) {
+        return r.bucket;
+      }).filter(function(a,i,all) {
+        return i == 0 ? true : all[i-1] !== a;
       });
-    }
-    */
-    a.push(fwk);
-    m[row[0]] = a;
-  });
-  var render = function() {
-    var page = $('#page');
-    page.empty();
-    var template = Handlebars.compile($('#grp-tmpl').html());
-    order.forEach(function(grp) {
-      page.append(template({ groupName: grp.replace(/-/g, ' '), frameworks: m[grp] }));
-    });
-  };
-  render();
+      rows.forEach(function(row) {
+        var a = m[row.bucket] || [];
+        a.push(row);
+        m[row.bucket] = a;
+      });
+      var render = function() {
+        var page = $('#page');
+        page.empty();
+        var template = Handlebars.compile($('#grp-tmpl').html());
+        order.forEach(function(grp) {
+          page.append(template({ groupName: grp.replace(/-/g, ' '), frameworks: m[grp] }));
+        });
+      };
+      render();
 
-  // http://www.google.co.in/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0CB4QFjAA&url=http%3A%2F%2Fbl.ocks.org%2Fmbostock%2F1705868&ei=pklWVZG4N5CwuATE5oC4Cw&usg=AFQjCNHl9OqxqQtRnOxHQPMjQkHroBia8g&sig2=huRhidnjskw_i5LKbBjbFw&bvm=bv.93564037,d.c2E
+
+    });
+
+
+  // http://bl.ocks.org/mbostock/1705868
   var width = 500, height = 500;
   var svg = d3.select('#right').append('svg')
       .attr('width', width)
