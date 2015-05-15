@@ -50,15 +50,43 @@ require(['jquery', 'bootstrap', './data', 'handlebars', 'd3'], function($, boots
     });
   };
   render();
+
+  // http://www.google.co.in/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0CB4QFjAA&url=http%3A%2F%2Fbl.ocks.org%2Fmbostock%2F1705868&ei=pklWVZG4N5CwuATE5oC4Cw&usg=AFQjCNHl9OqxqQtRnOxHQPMjQkHroBia8g&sig2=huRhidnjskw_i5LKbBjbFw&bvm=bv.93564037,d.c2E
   var width = 500, height = 500;
   var svg = d3.select('#right').append('svg')
       .attr('width', width)
-      .attr('height', height)
-      .append('rect')
-      .attr("x",0)
-      .attr("y",0)
-      .attr("width",width)
-      .attr("height",height)
-      .style("fill","#e5f5f9");
+      .attr('height', height);
+
+  var path = svg.append("path")
+      .attr('d', 'm 12.967,349.469 c 15.107,-87.283 25.932,-180.142 54.214,-264.61 31.17,-93.095 54.138,17.688 65.096,53.934 11.354,37.558 23.177,74.976 34.309,112.6 26.534,89.679 79.275,-25.286 92.183,-45.57 11.749,-18.462 20.938,-43.699 69.798,-48.289 70.298,-6.604 177.054,-4.848 224.858,-5.774')
+      .style('fill', 'none')
+      .attr('stroke', '#000')
+      .attr('stroke-width', '3px');
+
+  var circle = svg.append("circle")
+      .attr("r", 13)
+      .style('fill', 'steelblue')
+      .attr('stroke', '#fff')
+      .attr('stroke-width', '3px');
+
+  transition();
+
+  function transition() {
+    circle.transition()
+      .duration(10000)
+      .attrTween("transform", translateAlong(path.node()))
+      .each("end", transition);
+  }
+
+  // Returns an attrTween for translating along the specified path element.
+  function translateAlong(path) {
+    var l = path.getTotalLength();
+    return function(d, i, a) {
+      return function(t) {
+        var p = path.getPointAtLength(t * l);
+        return "translate(" + p.x + "," + p.y + ")";
+      };
+    };
+  }
 
 })
