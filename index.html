@@ -20,10 +20,10 @@
 
 
       <div class="row">
-        <div id="left" class="col-sm-6">
+        <div id="left" class="col-sm-4">
           <section id="page"></section>
         </div>
-        <div id="right" class="col-sm-6">
+        <div id="right" class="col-sm-8">
           <!--
           <img src="img/Gartner_Hype_Cycle.svg" />
           <small>Source: http://upload.wikimedia.org/wikipedia/commons/9/94/Gartner_Hype_Cycle.svg</small>
@@ -38,7 +38,11 @@
           <legend class="text-capitalize">{{groupName}}</legend>
           <ul>
           {{#each frameworks}}
-          <li><a href="{{link}}">{{name}}</a>{{#if stars}}&nbsp;<small><span class="glyphicon glyphicon-star alert-warning" aria-hidden="true"></span> {{stars}}</small>{{/if}}</li>
+          <li>
+            <a href="{{link}}">{{name}}</a>
+            {{#if stars}}&nbsp;<small><span class="glyphicon glyphicon-star alert-warning" aria-hidden="true"></span> {{stars}}</small>{{/if}}
+            {{#if score}}&nbsp;<small><span class="glyphicon glyphicon glyphicon-education alert-info" aria-hidden="true"></span> {{score}}</small>{{/if}}
+          </li>
           {{/each}}
           </ul>
         </fieldset>
