@@ -73,7 +73,7 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3'], function($, bootstrap, Hand
 
       
       // http://bl.ocks.org/mbostock/1705868
-      var width = 700, height = 400;
+      var width = 1000, height = 600;
       var color = d3.scale.category20();
       var o = d3.scale.ordinal()
           .domain(arr.map(function(fwk) { return fwk.score; }))
@@ -84,7 +84,7 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3'], function($, bootstrap, Hand
           .attr('height', height);
 
       var path = svg.append("path")
-          .attr('d', 'm 12.967,349.469 c 15.107,-87.283 25.932,-180.142 54.214,-264.61 31.17,-93.095 54.138,17.688 65.096,53.934 11.354,37.558 23.177,74.976 34.309,112.6 26.534,89.679 79.275,-25.286 92.183,-45.57 11.749,-18.462 20.938,-43.699 69.798,-48.289 70.298,-6.604 177.054,-4.848 224.858,-5.774')
+          .attr('d','m 7.177613,550.54409 c 27.69768,-149.13861 47.544599,-307.80481 99.397767,-452.1335 57.14814,-159.06944 99.25843,30.22313 119.3492,92.155891 20.81677,64.174559 42.49347,128.109889 62.90327,192.397229 48.6483,153.23261 145.3455,-43.20565 169.0116,-77.8645 21.541,-31.54563 38.3884,-74.66755 127.97,-82.51039 128.88667,-11.28411 324.61649,-8.28367 412.26209,-9.86591')
           .style('fill', 'none')
           .attr('stroke', '#000')
           .attr('stroke-width', '3px');
@@ -98,7 +98,7 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3'], function($, bootstrap, Hand
           .style('fill', function(d,i) { return color(i); })
           .attr('stroke', '#fff')
           .attr('transform', function(d, i) { var p = path.node().getPointAtLength(i * l); console.log(p.x, p.y); return 'translate(' + p.x + ',' + p.y + ')' ;})
-          .attr('stroke-width', '3px');
+          .attr('stroke-width', '0px');
 
         var text = svg.selectAll("text")
             .data(fwks)
