@@ -95,46 +95,88 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3'], function($, bootstrap, Hand
       function cumulative(i) {
         return splits.slice(0, i).reduce(function(a,b) { return a+b }, 0);
       }
+      var pn = path.node();
+      var pathWidth = pn.getBBox().width;
+      var pathLength = pn.getTotalLength();
+      
       var rect = svg.append('g')
           .attr('id', 'backgrounds')
           .selectAll('rect')
           .data(splits)
           .enter()
           .append('rect')
-          .attr('x', function(d, i) { return cumulative(i) * width })
+          .attr('x', function(d, i) { return cumulative(i) * pathWidth })
           .attr('y', 0)
-          .attr('width', function(d, i) { return d * width })
+          .attr('width', function(d, i) { return d * pathWidth })
           .attr('height', height)
           .style('fill', function(d, i) { return colors[i]; })
           .style('fill-opacity', '.2');
 
-      var l = path.node().getTotalLength() / fwks.length;
-      var circle = svg.append('g')
-          .attr('id', 'circles');
-          .selectAll('circle')
-          .data(fwks)
-          .enter()
-          .append("circle")
-          .attr("r", '5px')//function(d,i) { return o[i] })
-          .style('fill', function(d,i) { return color(i); })
-          .attr('stroke', '#fff')
-          .attr('transform', function(d, i) {
-            var p = path.node().getPointAtLength(i * l);
-            return 'translate(' + p.x + ',' + p.y + ')';
-          })
-          .attr('stroke-width', '0px');
+      // do some calculation to split the distance by the sections
+      var dot = svg.append('circle').attr('fill', '#000').attr('r', '5px').attr('stroke-width', '0px');
+      var offs = [];
+      var x = 0, i = 0, sl = splits.length;
+      while ( i < sl ) {
+        var lm = (cumulative(i) + splits[i]) * pathWidth;
+        x = lm;
+        var xy = pn.getPointAtLength(x);
+        dot.attr('transform', 'translate(' + xy.x + ',' + xy.y + ')');
+        if ( xy.x < lm ) {
+          while ( xy.x < lm ) {
+            x += Math.ceil((lm - xy.x) / 2);
+            xy = pn.getPointAtLength(x);
+            dot.attr('transform', 'translate(' + xy.x + ',' + xy.y + ')');
+          } 
+        } else {
+          while ( xy.x > lm ) {
+            x -= Math.ceil((lm - xy.x) / 2);
+            xy = pn.getPointAtLength(x);
+            dot.attr('transform', 'translate(' + xy.x + ',' + xy.y + ')');
+          }         
+        }
+        offs.push(x);
+        i++;
+      }
+      dot.remove();
+      // finished nasty...X|
+      console.log(offs);
 
-      var text = svg.append('g')
-          .attr('id', 'labels')
-          .selectAll("text")
-          .data(fwks)
-          .enter().append("text")
-          .attr("class", "label")
-          .attr('transform', function(d, i) {
-            var p = path.node().getPointAtLength(i * l);
-            return 'translate(' + Math.ceil(p.x + 5) + ',' + (p.y + (i%2 == 0 ? -5 : 12)) + ')';
-          })
-          .text(function(d) { return d.name ; });
+      var circles = svg.append('g')
+          .attr('id', 'phases');
+
+      order.forEach(function(group, i) {
+        var bucket = circles.append('g')
+            .attr('id', group);
+        var offset = i == 0 ? 0 : offs[i-1];
+        var segment = (offs[i] - offset) / m[group].length;
+        console.log('offset', offset, 'segment', segment, 'length', (pathWidth * splits[i]), 'gl', m[group].length);
+        var dots = bucket.selectAll('circle')
+            .data(m[group])
+            .enter()
+            .append('circle')
+            .attr('r', '5px')
+            .attr('fill', function(d,i) { return color(i); })
+            .attr('transform', function(d, i) {
+              var p = pn.getPointAtLength(offset + (segment * i));
+              return 'translate(' + p.x + ',' + p.y + ')';
+            })
+            .attr('stroke-width', '0px');
+
+        var text = bucket.selectAll("text")
+            .data(m[group])
+            .enter()
+            .append('a')
+            .attr('href', function(d, i) { return d.link; })
+            .attr('title', function(d, i) { return d.description; })
+            .append("text")
+            .attr('class', 'label')
+            .attr('transform', function(d, i) {
+              var p = pn.getPointAtLength(offset + (segment * i) );
+              return 'translate(' + Math.ceil(p.x + 5) + ',' + (p.y + (i%2 == 0 ? -5 : 12)) + ')';
+            })
+            .text(function(d) { return d.name ; });
+
+      });
 
     });
 
