@@ -79,7 +79,7 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3'], function($, bootstrap, Hand
           .domain(arr.map(function(fwk) { return fwk.score; }))
           .rangeRoundPoints([0, 50]).range();
       
-      var svg = d3.select('#right').append('svg')
+      var svg = d3.select('#infographic').append('svg')
           .attr('width', width)
           .attr('height', height);
 
@@ -89,8 +89,30 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3'], function($, bootstrap, Hand
           .attr('stroke', '#000')
           .attr('stroke-width', '3px');
 
+      var colors = ['#00ced1', '#ee82ee', '#00ff7f', '#ffa07a', '#ffd700'];
+      colors = [ '#386cb0', '#ffff99', '#fdc086', '#beaed4', '#7fc97f' ];
+      colors = [ '#d7191c', '#fdae61', '#ffffbf', '#a6d96a', '#1a9641' ]
+      var splits = [.1, .2, .1, .2, .4];
+      function cumulative(i) {
+        return splits.slice(0, i).reduce(function(a,b) { return a+b }, 0);
+      }
+      var rect = svg.append('g')
+          .attr('id', 'backgrounds')
+          .selectAll('rect')
+          .data(splits)
+          .enter()
+          .append('rect')
+          .attr('x', function(d, i) { return cumulative(i) * width })
+          .attr('y', 0)
+          .attr('width', function(d, i) { return d * width })
+          .attr('height', height)
+          .style('fill', function(d, i) { return colors[i]; })
+          .style('fill-opacity', '.2');
+
       var l = path.node().getTotalLength() / fwks.length;
-      var circle = svg.selectAll('circle')
+      var circle = svg.append('g')
+          .attr('id', 'circles')
+          .selectAll('circle')
           .data(fwks)
           .enter()
           .append("circle")
@@ -100,12 +122,18 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3'], function($, bootstrap, Hand
           .attr('transform', function(d, i) { var p = path.node().getPointAtLength(i * l); console.log(p.x, p.y); return 'translate(' + p.x + ',' + p.y + ')' ;})
           .attr('stroke-width', '0px');
 
-        var text = svg.selectAll("text")
-            .data(fwks)
-            .enter().append("text")
-            .attr("class", "label")
-            .attr('transform', function(d, i) { var p = path.node().getPointAtLength(i * l); console.log(p.x, p.y); return 'translate(' + Math.ceil(p.x + 5) + ',' + (p.y + (i%2 == 0 ? -5 : 12)) + ')' ;})
-            .text(function(d) { return d.name ; });
+      var text = svg.append('g')
+          .attr('id', 'labels')
+          .selectAll("text")
+          .data(fwks)
+          .enter().append("text")
+          .attr("class", "label")
+          .attr('transform', function(d, i) {
+            var p = path.node().getPointAtLength(i * l);
+            console.log(p.x, p.y);
+            return 'translate(' + Math.ceil(p.x + 5) + ',' + (p.y + (i%2 == 0 ? -5 : 12)) + ')';
+          })
+          .text(function(d) { return d.name ; });
 
     });
 
