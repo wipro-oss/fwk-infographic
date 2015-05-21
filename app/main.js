@@ -71,7 +71,6 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3'], function($, bootstrap, Hand
       };
       render();
 
-      
       // http://bl.ocks.org/mbostock/1705868
       var width = 1000, height = 600;
       var color = d3.scale.category20();
@@ -111,7 +110,7 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3'], function($, bootstrap, Hand
 
       var l = path.node().getTotalLength() / fwks.length;
       var circle = svg.append('g')
-          .attr('id', 'circles')
+          .attr('id', 'circles');
           .selectAll('circle')
           .data(fwks)
           .enter()
@@ -119,7 +118,10 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3'], function($, bootstrap, Hand
           .attr("r", '5px')//function(d,i) { return o[i] })
           .style('fill', function(d,i) { return color(i); })
           .attr('stroke', '#fff')
-          .attr('transform', function(d, i) { var p = path.node().getPointAtLength(i * l); console.log(p.x, p.y); return 'translate(' + p.x + ',' + p.y + ')' ;})
+          .attr('transform', function(d, i) {
+            var p = path.node().getPointAtLength(i * l);
+            return 'translate(' + p.x + ',' + p.y + ')';
+          })
           .attr('stroke-width', '0px');
 
       var text = svg.append('g')
@@ -130,7 +132,6 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3'], function($, bootstrap, Hand
           .attr("class", "label")
           .attr('transform', function(d, i) {
             var p = path.node().getPointAtLength(i * l);
-            console.log(p.x, p.y);
             return 'translate(' + Math.ceil(p.x + 5) + ',' + (p.y + (i%2 == 0 ? -5 : 12)) + ')';
           })
           .text(function(d) { return d.name ; });
