@@ -134,7 +134,7 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3'], function($, bootstrap, Hand
             dot.attr('transform', 'translate(' + xy.x + ',' + xy.y + ')');
           }         
         }
-        offs.push(x);
+        offs.push(x + 20);
         i++;
       }
       dot.remove();
