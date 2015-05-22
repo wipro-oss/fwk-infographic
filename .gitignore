@@ -1,2 +1,4 @@
 dist
 app/vendor
+img
+node_modules
