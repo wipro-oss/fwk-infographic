@@ -10,6 +10,7 @@ define(function() {
     ['inflated-expectations', 'Spring Boot', 'http://projects.spring.io/spring-boot/', 'http://github.com/spring-projects/spring-boot'],
     ['inflated-expectations', 'FOAM', 'http://foam-framework.github.io/foam/', 'https://github.com/foam-framework/foam'],
     ['inflated-expectations', 'Aurelia', 'http://aurelia.io/', 'https://github.com/aurelia/framework'],
+    ['inflated-expectations', 'Hapi', 'http://hapijs.com/', 'https://github.com/hapijs/hapi'],
     ['inflated-expectations', 'Mithril', 'https://lhorie.github.io/mithril/', 'http://github.com/lhorie/mithril.js'],
     ['inflated-expectations', 'DropWizard', 'http://www.dropwizard.io/', 'https://github.com/dropwizard/dropwizard'],
     ['disillusionment-trough', 'ExpressJS', 'http://expressjs.com/', 'https://github.com/strongloop/express'],
