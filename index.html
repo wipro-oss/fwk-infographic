@@ -41,6 +41,9 @@
       <div class="tip bg-info">
         <h4>{{name}}</h4>
         <small class="text-muted">{{excerpt}}</small>
+        {{#unless excerpt}}
+        <small class="text-muted">{{description}}</small>
+        {{/unless}}
         <!--
         <table class="table">
           <tr>
