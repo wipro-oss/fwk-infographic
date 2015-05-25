@@ -7,6 +7,7 @@ define(function() {
     ['tech-trigger', 'Derby.js', 'http://derbyjs.com/', 'https://github.com/derbyjs/derby'],
     ['inflated-expectations', 'ReactJS-Flux', 'https://facebook.github.io/flux/', 'http://github.com/facebook/flux'],
     ['inflated-expectations', 'ReactJS', 'https://facebook.github.io/react/', 'https://github.com/facebook/react'],
+    ['inflated-expectations', 'Ninja', 'http://www.ninjaframework.org/', 'https://github.com/ninjaframework/ninja'],
     ['inflated-expectations', 'Spring Boot', 'http://projects.spring.io/spring-boot/', 'http://github.com/spring-projects/spring-boot'],
     ['inflated-expectations', 'FOAM', 'http://foam-framework.github.io/foam/', 'https://github.com/foam-framework/foam'],
     ['inflated-expectations', 'Aurelia', 'http://aurelia.io/', 'https://github.com/aurelia/framework'],

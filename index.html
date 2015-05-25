@@ -9,6 +9,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="app/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet"/>
   </head>
 
   <body>
@@ -35,6 +36,48 @@
           {{/each}}
         </ul>
       </fieldset>
+    </script>
+    <script id="tip-tmpl" type="text/x-handlebars-template">
+      <div class="tip bg-info">
+        <h4>{{name}}</h4>
+        <small class="text-muted">{{excerpt}}</small>
+        <!--
+        <table class="table">
+          <tr>
+            <td>Stars</td>
+            <td>{{stars}}</td>
+          </tr>
+          <tr>
+            <td>Forks</td>
+            <td>{{forks}}</td>
+          </tr>
+          <tr>
+            <td>Commits</td>
+            <td>{{commits}}</td>
+          </tr>
+          <tr>
+            <td>Releases</td>
+            <td>{{releases}}</td>
+          </tr>
+          <tr>
+            <td>Contributors</td>
+            <td>{{contributors}}</td>
+          </tr>
+          <tr>
+            <td>Open Issues</td>
+            <td>{{openIssues}}</td>
+          </tr>
+          <tr>
+            <td>Stackoverflow Questions</td>
+            <td>{{stackoverflowQuestions}}</td>
+          </tr>
+          <tr>
+            <td>Language</td>
+            <td>{{language}}</td>
+          </tr>
+        </table>
+        -->
+      </div>
     </script>
   </body>
 </html>

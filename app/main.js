@@ -9,11 +9,12 @@ require.config({
     jquery: 'vendor/jquery/dist/jquery',
     bootstrap: 'vendor/bootstrap/dist/js/bootstrap',
     handlebars: 'vendor/handlebars/handlebars',
-    d3: 'vendor/d3/d3'
+    d3: 'vendor/d3/d3',
+    'd3-tip': 'vendor/d3-tip/index'
   }
 });
 
-require(['jquery', 'bootstrap', 'handlebars', 'd3'], function($, bootstrap, Handlebars, d3) {
+require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, bootstrap, Handlebars, d3, d3Tip) {
   d3.csv('app/csv/fwk-infographic.csv')
     .get(function(err, rows) {
       if ( err ) throw err;
@@ -90,7 +91,7 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3'], function($, bootstrap, Hand
 
       var colors = ['#00ced1', '#ee82ee', '#00ff7f', '#ffa07a', '#ffd700'];
       colors = [ '#386cb0', '#ffff99', '#fdc086', '#beaed4', '#7fc97f' ];
-      colors = [ '#d7191c', '#fdae61', '#ffffbf', '#a6d96a', '#1a9641' ]
+      colors = [ '#d7191c', '#fdae61', '#ffffbf', '#a6d96a', '#1a9641' ];
       var splits = [.1, .2, .1, .2, .4];
       function cumulative(i) {
         return splits.slice(0, i).reduce(function(a,b) { return a+b }, 0);
@@ -98,10 +99,11 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3'], function($, bootstrap, Hand
       var pn = path.node();
       var pathWidth = pn.getBBox().width;
       var pathLength = pn.getTotalLength();
-      
-      var rect = svg.append('g')
-          .attr('id', 'backgrounds')
-          .selectAll('rect')
+
+      // draw background
+      var backgrounds = svg.append('g')
+          .attr('id', 'backgrounds');
+      var rect = backgrounds.selectAll('rect')
           .data(splits)
           .enter()
           .append('rect')
@@ -111,6 +113,32 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3'], function($, bootstrap, Hand
           .attr('height', height)
           .style('fill', function(d, i) { return colors[i]; })
           .style('fill-opacity', '.2');
+
+      // write background labels
+      var initialOffset = 5;
+      var bgTitles = [
+        { label: 'Technology Trigger', orientation: 'vertical' },
+        { label: 'Inflated Expectations', orientation: 'horizontal' },
+        { label: 'Disillusionment Trough', orientation: 'vertical' },
+        { label: 'Enlightenment Slope', orientation: 'vertical' },
+        { label: 'Productivity Plateau', orientation: 'horizontal' }
+      ];
+      bgTitles.forEach(function(title, i) {
+        var vertical = title.orientation == 'vertical';
+        var transform = vertical ? 'rotate(-90, 0, 0)' : '';
+        var txt = backgrounds.append('text')
+            .attr('class', 'bucket')
+            .style('stroke-width', '0px')
+            .style('fill', i == 2 ? '#ffd700' : colors[i])
+            .attr('transform', transform)
+            .text(title.label);
+        var br = txt.node().getBoundingClientRect();
+        var p = {
+          x: (cumulative(i) * pathWidth) + initialOffset + (vertical ? Math.ceil(br.width) : 0),
+          y: initialOffset + (vertical ? Math.ceil(br.height) : Math.ceil(br.height) )
+        };
+        txt.attr('transform', 'translate(' + p.x + ', ' + p.y + ') ' + transform);
+      });
 
       // do some calculation to split the distance by the sections
       var dot = svg.append('circle').attr('fill', '#000').attr('r', '5px').attr('stroke-width', '0px');
@@ -139,68 +167,48 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3'], function($, bootstrap, Hand
       }
       dot.remove();
       // finished nasty...X|
-      console.log(offs);
 
       var circles = svg.append('g')
           .attr('id', 'phases');
 
+      var tipTemplate = Handlebars.compile($('#tip-tmpl').html());
+      var tip = d3Tip()
+          .attr('class', 'd3-tip')
+          .html(function(d) { return tipTemplate(d); })
+          .offset([-12, 0]);
+      svg.call(tip);
       order.forEach(function(group, i) {
         var bucket = circles.append('g')
             .attr('id', group);
         var offset = i == 0 ? 0 : offs[i-1];
         var segment = (offs[i] - offset) / m[group].length;
-        console.log('offset', offset, 'segment', segment, 'length', (pathWidth * splits[i]), 'gl', m[group].length);
-        var dots = bucket.selectAll('circle')
+        //console.log('offset', offset, 'segment', segment, 'length', (pathWidth * splits[i]), 'gl', m[group].length);
+        var nameToId = function(name) {
+          return name.replace(/\W+/g, '-').toLowerCase().replace(/-$/, '');
+        };
+        var dot = bucket.selectAll('.fwk')
             .data(m[group])
             .enter()
-            .append('circle')
-            .attr('r', '5px')
-            .attr('fill', function(d,i) { return color(i); })
+            .append('g')
+            .attr('id', function(d) { return nameToId(d.name) })
+            .attr('class', 'fwk')
             .attr('transform', function(d, i) {
               var p = pn.getPointAtLength(offset + (segment * i));
               return 'translate(' + p.x + ',' + p.y + ')';
             })
-            .attr('stroke-width', '0px');
+            .on('mouseover', tip.show)
+            .on('mouseout', tip.hide);
 
-        var text = bucket.selectAll("text")
-            .data(m[group])
-            .enter()
-            .append('a')
-            .attr('href', function(d, i) { return d.link; })
-            .attr('title', function(d, i) { return d.description; })
-            .append("text")
-            .attr('class', 'label')
-            .attr('transform', function(d, i) {
-              var p = pn.getPointAtLength(offset + (segment * i) );
-              return 'translate(' + Math.ceil(p.x + 5) + ',' + (p.y + (i%2 == 0 ? -5 : 12)) + ')';
-            })
-            .text(function(d) { return d.name ; });
-
+        dot.append('circle')
+          .attr('r', '5px')
+          .attr('fill', function(d, i) { return color(i) });
+        dot.append('a')
+          .attr('href', function(d, i) { return d.link; })
+          .attr('title', function(d, i) { return d.description; })
+          .append("text")
+          .attr('class', 'fwk-label')
+          .attr('transform', function(d, i) { return group == 'productivity-plateau' ? 'translate(5, -10) rotate(-90, 0, 0)': 'translate(10, 5)'; })
+          .text(function(d) { return d.name ; });
       });
-
     });
-
-
-
-/*
-  transition();
-
-  function transition() {
-    circle.transition()
-      .duration(10000)
-      .attrTween("transform", translateAlong(path.node()))
-      .each("end", transition);
-  }
-*/
-  // Returns an attrTween for translating along the specified path element.
-  function translateAlong(path) {
-    var l = path.getTotalLength();
-    return function(d, i, a) {
-      return function(t) {
-        var p = path.getPointAtLength(t * l);
-        return "translate(" + p.x + "," + p.y + ")";
-      };
-    };
-  }
-
 })
