@@ -22,6 +22,7 @@
       <div id="infographic"></div>
       <div id="page" class="row"></div>
     </section>
+    <footer></footer>
 
     <script data-main="app/main.js" src="app/vendor/requirejs/require.js"></script>
     <script id="grp-tmpl" type="text/x-handlebars-template">
@@ -53,6 +54,7 @@
           {{#if openIssues}}<nobr><span class="octicon octicon-issue-opened"></span> {{openIssues}}</nobr>{{/if}}
           {{#if contributors}}<nobr><span class="octicon octicon-organization"></span> {{contributors}}</nobr>{{/if}}
           {{#if stackoverflowQuestions}}<nobr><img src="img/stackoverflow.svg" height="20"> {{stackoverflowQuestions}}</nobr>{{/if}}
+          <nobr><span class="octicon octicon-zap"> {{score}}</span></nobr>
         </p>
       </div>
     </script>

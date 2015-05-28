@@ -86,7 +86,10 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
           fwk.score = fwk.githubScore + fwk.stackoverflowScore;
         });
         fwks = fwks.concat(m[grp]);
-      })
+      });
+      order.forEach(function(grp) {
+        m[grp] = m[grp].sort(function(a,b) { return a.score - b.score });
+      });
       var arr = [];
       var render = function() {
         var page = $('#page');
