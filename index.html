@@ -9,6 +9,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="app/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="app/vendor/octicons/octicons/octicons.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet"/>
   </head>
 
@@ -44,42 +45,15 @@
         {{#unless excerpt}}
         <small class="text-muted">{{description}}</small>
         {{/unless}}
-        <!--
-        <table class="table">
-          <tr>
-            <td>Stars</td>
-            <td>{{stars}}</td>
-          </tr>
-          <tr>
-            <td>Forks</td>
-            <td>{{forks}}</td>
-          </tr>
-          <tr>
-            <td>Commits</td>
-            <td>{{commits}}</td>
-          </tr>
-          <tr>
-            <td>Releases</td>
-            <td>{{releases}}</td>
-          </tr>
-          <tr>
-            <td>Contributors</td>
-            <td>{{contributors}}</td>
-          </tr>
-          <tr>
-            <td>Open Issues</td>
-            <td>{{openIssues}}</td>
-          </tr>
-          <tr>
-            <td>Stackoverflow Questions</td>
-            <td>{{stackoverflowQuestions}}</td>
-          </tr>
-          <tr>
-            <td>Language</td>
-            <td>{{language}}</td>
-          </tr>
-        </table>
-        -->
+        <p>
+          {{#if commits}}<nobr><span class="octicon octicon-history"></span> {{commits}}</nobr>{{/if}}
+          {{#if stars}}<nobr><span class="octicon octicon-star"></span> {{stars}}</nobr>{{/if}}
+          {{#if forks}}<nobr><span class="octicon octicon-repo-forked"></span> {{forks}}</nobr>{{/if}}
+          {{#if releases}}<nobr><span class="octicon octicon-tag"></span> {{releases}}</nobr>{{/if}}
+          {{#if openIssues}}<nobr><span class="octicon octicon-issue-opened"></span> {{openIssues}}</nobr>{{/if}}
+          {{#if contributors}}<nobr><span class="octicon octicon-organization"></span> {{contributors}}</nobr>{{/if}}
+          {{#if stackoverflowQuestions}}<nobr><img src="img/stackoverflow.svg" height="20"> {{stackoverflowQuestions}}</nobr>{{/if}}
+        </p>
       </div>
     </script>
     <script id="legend-tmpl" type="text/x-handlebars-template">
