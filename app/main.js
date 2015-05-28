@@ -15,15 +15,28 @@ require.config({
 });
 
 require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, bootstrap, Handlebars, d3, d3Tip) {
+  var nameToId = function(name) {
+    return name.replace(/\W+|\s+/g, '-').toLowerCase().replace(/-$/, '');
+  };
+  function captialize(s) {
+    if ( undefined == s ) {
+      return s;
+    }
+    return s.substring(0, 1).toUpperCase() + s.substring(1);
+  }
   d3.csv('app/csv/fwk-infographic.csv')
     .get(function(err, rows) {
       if ( err ) throw err;
       var m = {};
       // get unique elements in order
-      var order = rows.map(function(r) {
-        return r.bucket;
-      }).filter(function(a,i,all) {
-        return i == 0 ? true : all[i-1] !== a;
+      var order = [];
+      rows.forEach(function(r) {
+        if ( order.indexOf(r.bucket) == -1 ) {
+          order.push(r.bucket);
+        }
+        r.id = nameToId(r.name);
+        r.excerpt = captialize(r.excerpt);
+        r.description = captialize(r.description);
       });
       var pps = 0, ppn = 0;
       rows.forEach(function(row) {
@@ -183,9 +196,6 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
         var offset = i == 0 ? 0 : offs[i-1];
         var segment = (offs[i] - offset) / m[group].length;
         //console.log('offset', offset, 'segment', segment, 'length', (pathWidth * splits[i]), 'gl', m[group].length);
-        var nameToId = function(name) {
-          return name.replace(/\W+/g, '-').toLowerCase().replace(/-$/, '');
-        };
         var dot = bucket.selectAll('.fwk')
             .data(m[group])
             .enter()

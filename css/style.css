@@ -28,10 +28,18 @@
 */
 
 .tip {
-  width: 200px;
+  width: 250px;
   height: 100%;
   border: 2px solid #337AB7;
   border-radius: 5px;
+  padding: 5px;
+}
+
+.tip div {
+  text-align: center;
+}
+.tip div > img {
+  margin: auto;
 }
 
 .bucket {
