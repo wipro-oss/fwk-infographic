@@ -82,5 +82,15 @@
         -->
       </div>
     </script>
+    <script id="legend-tmpl" type="text/x-handlebars-template">
+      <div id="legend" class="form-inline">
+        {{#each filters}}
+        <div class="checkbox">
+          <label><input type="checkbox" name="{{@key}}" value="{{@key}}" checked="checked"> {{.}}</label>
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {{/each}}
+      </div>
+    </script>
   </body>
 </html>

@@ -24,6 +24,20 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
     }
     return s.substring(0, 1).toUpperCase() + s.substring(1);
   }
+  var filters = {
+    'client-web-framework': 'SPA Framework',
+    'css-authoring': 'CSS Authoring',
+    'js-library': 'JS Library',
+    'rwd-css-frameworks': 'RWD Frameworks',
+    'server-web-framework': 'Web Framework',
+    'web-components': 'Web Components'
+  };
+  var legend = Handlebars.compile($('#legend-tmpl').html());
+  $('#infographic').before(legend({filters: filters}));
+  $('#legend input').on('click', function(el) {
+    var display = el.target.checked ? 'block' : 'none';
+    d3.selectAll('.' + el.target.value).style('display', display);
+  });
   d3.csv('app/csv/fwk-infographic.csv')
     .get(function(err, rows) {
       if ( err ) throw err;
@@ -87,7 +101,7 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
 
       // http://bl.ocks.org/mbostock/1705868
       var width = 1000, height = 600;
-      var color = d3.scale.category20();
+      var color = d3.scale.category20().domain(Object.keys(filters));
       var o = d3.scale.ordinal()
           .domain(arr.map(function(fwk) { return fwk.score; }))
           .rangeRoundPoints([0, 50]).range();
@@ -201,7 +215,7 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
             .enter()
             .append('g')
             .attr('id', function(d) { return nameToId(d.name) })
-            .attr('class', 'fwk')
+            .attr('class', function(d) { return 'fwk ' + d.type })
             .attr('transform', function(d, i) {
               var dist = offset + (segment * i);
               var p = pn.getPointAtLength(dist);
@@ -216,7 +230,7 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
 
         dot.append('circle')
           .attr('r', '5px')
-          .attr('fill', function(d, i) { return color(i) });
+          .attr('fill', function(d, i) { return color(d.type) });
         dot.append('a')
           .attr('href', function(d, i) { return d.link; })
           .attr('title', function(d, i) { return d.description; })
