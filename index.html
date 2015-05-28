@@ -19,23 +19,23 @@
     </header>
     <section class="container">
       <div id="infographic"></div>
-      <div id="page"></div>
+      <div id="page" class="row"></div>
     </section>
 
     <script data-main="app/main.js" src="app/vendor/requirejs/require.js"></script>
     <script id="grp-tmpl" type="text/x-handlebars-template">
-      <fieldset>
-        <legend class="text-capitalize">{{groupName}}</legend>
-        <ul>
-          {{#each frameworks}}
-          <li>
-            <a href="{{link}}">{{name}}</a>
-            {{#if stars}}&nbsp;<small><span class="glyphicon glyphicon-star alert-warning" aria-hidden="true"></span> {{stars}}</small>{{/if}}
-            {{#if score}}&nbsp;<small><span class="glyphicon glyphicon glyphicon-education alert-info" aria-hidden="true"></span> {{score}}</small>{{/if}}
-          </li>
-          {{/each}}
-        </ul>
-      </fieldset>
+      <div class="col-lg-2">
+        <fieldset>
+          <legend class="l-bucket text-capitalize">{{groupName}}</legend>
+          <ul>
+            {{#each frameworks}}
+            <li>
+              <a href="{{link}}">{{name}}</a>
+            </li>
+            {{/each}}
+          </ul>
+        </fieldset>
+      </div>
     </script>
     <script id="tip-tmpl" type="text/x-handlebars-template">
       <div class="tip bg-info">

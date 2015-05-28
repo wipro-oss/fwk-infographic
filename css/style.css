@@ -45,3 +45,8 @@
   font-weight: bold;
   cursor: pointer;
 }
+
+.l-bucket {
+  font-size: 14px;
+  font-weight: 700;
+}

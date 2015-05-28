@@ -193,8 +193,13 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
             .attr('id', function(d) { return nameToId(d.name) })
             .attr('class', 'fwk')
             .attr('transform', function(d, i) {
-              var p = pn.getPointAtLength(offset + (segment * i));
-              return 'translate(' + p.x + ',' + p.y + ')';
+              var dist = offset + (segment * i);
+              var p = pn.getPointAtLength(dist);
+              var p1 = pn.getPointAtLength(dist - 20);
+              var p2 = pn.getPointAtLength(dist + 20);
+              var angle = ((Math.atan((p2.y - p1.y)/(p2.x - p1.x)) * 180) / Math.PI) + 90;
+              angle = angle > 100 || (angle+5) > 90 ? angle - 180 : angle;
+              return 'translate(' + p.x + ',' + p.y + ') rotate(' + angle.toFixed(2) + ', 0, 0)';
             })
             .on('mouseover', tip.show)
             .on('mouseout', tip.hide);
@@ -207,7 +212,7 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
           .attr('title', function(d, i) { return d.description; })
           .append("text")
           .attr('class', 'fwk-label')
-          .attr('transform', function(d, i) { return group == 'productivity-plateau' ? 'translate(5, -10) rotate(-90, 0, 0)': 'translate(10, 5)'; })
+          .attr('transform', 'translate(10, 5)')
           .text(function(d) { return d.name ; });
       });
     });
