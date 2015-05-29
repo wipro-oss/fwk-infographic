@@ -117,7 +117,7 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
           .attr('d','m 7.177613,550.54409 c 27.69768,-149.13861 47.544599,-307.80481 99.397767,-452.1335 57.14814,-159.06944 99.25843,30.22313 119.3492,92.155891 20.81677,64.174559 42.49347,128.109889 62.90327,192.397229 48.6483,153.23261 145.3455,-43.20565 169.0116,-77.8645 21.541,-31.54563 38.3884,-74.66755 127.97,-82.51039 128.88667,-11.28411 324.61649,-8.28367 412.26209,-9.86591')
           .style('fill', 'none')
           .attr('stroke', '#000')
-          .attr('stroke-width', '3px');
+          .attr('stroke-width', '1px');
 
       var colors = ['#00ced1', '#ee82ee', '#00ff7f', '#ffa07a', '#ffd700'];
       colors = [ '#386cb0', '#ffff99', '#fdc086', '#beaed4', '#7fc97f' ];
@@ -225,14 +225,17 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
               var p1 = pn.getPointAtLength(dist - 20);
               var p2 = pn.getPointAtLength(dist + 20);
               var angle = ((Math.atan((p2.y - p1.y)/(p2.x - p1.x)) * 180) / Math.PI) + 90;
-              angle = angle > 100 || (angle+5) > 90 ? angle - 180 : angle;
+              if ( d.id == 'wicket' ) {
+                console.log(d.id, angle);
+              }
+              angle = angle > 115 || ( angle < 90 && (angle+5) > 90) ? angle - 180 : angle;
               return 'translate(' + p.x + ',' + p.y + ') rotate(' + angle.toFixed(2) + ', 0, 0)';
             })
             .on('mouseover', tip.show)
             .on('mouseout', tip.hide);
 
         dot.append('circle')
-          .attr('r', '5px')
+          .attr('r', '4px')
           .attr('fill', function(d, i) { return color(d.type) });
         dot.append('a')
           .attr('href', function(d, i) { return d.link; })
