@@ -30,7 +30,8 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
     'js-library': 'JS Library',
     'rwd-css-frameworks': 'RWD Frameworks',
     'server-web-framework': 'Web Framework',
-    'web-components': 'Web Components'
+    'web-components': 'Web Components',
+    'micro-framework': '&mu; Frameworks'
   };
   var legend = Handlebars.compile($('#legend-tmpl').html());
   $('#infographic').before(legend({filters: filters}));
@@ -43,15 +44,19 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
       if ( err ) throw err;
       var m = {};
       // get unique elements in order
-      var order = [];
+      var order = [
+        'tech-trigger',
+        'inflated-expectations',
+        'disillusionment-trough',
+        'enlightenment-slope',
+        'productivity-plateau'
+      ];
       rows.forEach(function(r) {
-        if ( order.indexOf(r.bucket) == -1 ) {
-          order.push(r.bucket);
-        }
         r.id = nameToId(r.name);
         r.excerpt = captialize(r.excerpt);
         r.description = captialize(r.description);
       });
+      var languages = {};
       var pps = 0, ppn = 0;
       rows.forEach(function(row) {
         var a = m[row.bucket] || [];
@@ -73,8 +78,24 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
         } else {
           row.stackoverflowScore = 0;
         }
+        if ( row.language == 'js' ) {
+          row.language = 'JavaScript';
+        } else if ( row.language == 'C#' ) {
+          row.language = 'C-Sharp';
+        } else if ( row.id == 'jboss-seam' ) {
+          row.language = 'Java';
+        }
         a.push(row);
         m[row.bucket] = a;
+        var l = languages[row.language] || 0;
+        l++;
+        languages[row.language] = l;
+      });
+      var langTemplate = Handlebars.compile($('#language-tmpl').html());
+      $('#infographic').before(langTemplate({languages: languages}));
+      $('#languages input').on('click', function(el) {
+        var display = el.target.checked ? 'block' : 'none';
+        d3.selectAll('.' + el.target.value).style('display', display);
       });
       var fwks = [];
       // ext-js
@@ -218,7 +239,7 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
             .enter()
             .append('g')
             .attr('id', function(d) { return nameToId(d.name) })
-            .attr('class', function(d) { return 'fwk ' + d.type })
+            .attr('class', function(d) { return 'fwk ' + d.type.replace(/,/g, ' ') + ' ' + d.language })
             .attr('transform', function(d, i) {
               var dist = offset + (segment * i);
               var p = pn.getPointAtLength(dist);
