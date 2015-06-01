@@ -226,6 +226,7 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
       var tip = d3Tip()
           .attr('class', 'd3-tip')
           .html(function(d) { return tipTemplate(d); })
+          .direction('s')
           .offset([-12, 0]);
       svg.call(tip);
       order.forEach(function(group, i) {
@@ -257,7 +258,7 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
 
         dot.append('circle')
           .attr('r', '4px')
-          .attr('fill', function(d, i) { return color(d.type) });
+          .attr('fill', function(d, i) { return color(d.type.replace(/,.*$/, '')) });
         dot.append('a')
           .attr('href', function(d, i) { return d.link; })
           .attr('title', function(d, i) { return d.description; })
@@ -266,5 +267,60 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
           .attr('transform', 'translate(10, 5)')
           .text(function(d) { return d.name ; });
       });
+
+      // add legend
+      var s = 200;
+
+      var filterKeys = Object.keys(filters);
+      var svg = d3.select('#infographic svg');
+      var legend = svg.append('g')
+          .attr('class', 'legend')
+          .attr('transform', 'translate('+ (width-s) + ',' + (height-s) + ')');
+
+      //Create the title for the legend
+      var text = legend.append("text")
+          .attr("class", "title")
+          .attr("x", 25)
+          .attr("y", 10)
+          .style('font-weight', 'bold')
+          .style("font-size", "12px")
+          .attr("fill", "#404040")
+          .text("Legend");
+
+      var g = legend.selectAll('g')
+          .data(filterKeys)
+          .enter()
+          .append('g');
+
+      g.attr('class', 'legend-item')
+        .attr('transform', function(d,i) { return 'translate(10, ' + ((i * 10) + 30) + ')' })
+        .attr('id', function(d, i) { return 'l-' + d })
+        .on('click', function(e) {
+          var id = this.id.replace(/l-/, '');
+          var checked = this.getAttribute('data-value') == 'checked';
+          this.setAttribute('data-value', checked ? 'unchecked' : 'checked');
+          var display = checked ? 'none' : 'block';
+          svg.selectAll('.' + id).style('visibility', checked ? 'visible' : 'hidden');
+          d3.select('#lr-' + id).style('fill-opacity', checked ? 1 : 0);
+        });
+
+      g.append('rect')
+        .attr('id', function(d, i) { return 'lr-' + filterKeys[i] })
+        .attr('x', 0)
+        .attr('y', function(d, i) { return i * 10 })
+        .attr('width', 10)
+        .attr('height', 10)
+        .style('stroke', '#ccc')
+        .style('fill', function(d, i) { return color(d) });
+
+      g.append('text')
+        .attr('data-value', 'checked')
+        .attr('x', 15)
+        .attr('y', function(d, i) { return (i * 10) + 7 })
+        .attr("font-size", "11px")
+        .attr("fill", "#737373")
+        .html(function(d,i) { return filters[d] });
+
+
     });
 })
