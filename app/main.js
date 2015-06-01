@@ -33,12 +33,6 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
     'web-components': 'Web Components',
     'micro-framework': '&mu; Frameworks'
   };
-  var legend = Handlebars.compile($('#legend-tmpl').html());
-  $('#infographic').before(legend({filters: filters}));
-  $('#legend input').on('click', function(el) {
-    var display = el.target.checked ? 'block' : 'none';
-    d3.selectAll('.' + el.target.value).style('display', display);
-  });
   d3.csv('app/csv/fwk-infographic.csv')
     .get(function(err, rows) {
       if ( err ) throw err;
@@ -56,7 +50,6 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
         r.excerpt = captialize(r.excerpt);
         r.description = captialize(r.description);
       });
-      var languages = {};
       var pps = 0, ppn = 0;
       rows.forEach(function(row) {
         var a = m[row.bucket] || [];
@@ -78,24 +71,8 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
         } else {
           row.stackoverflowScore = 0;
         }
-        if ( row.language == 'js' ) {
-          row.language = 'JavaScript';
-        } else if ( row.language == 'C#' ) {
-          row.language = 'C-Sharp';
-        } else if ( row.id == 'jboss-seam' ) {
-          row.language = 'Java';
-        }
         a.push(row);
         m[row.bucket] = a;
-        var l = languages[row.language] || 0;
-        l++;
-        languages[row.language] = l;
-      });
-      var langTemplate = Handlebars.compile($('#language-tmpl').html());
-      $('#infographic').before(langTemplate({languages: languages}));
-      $('#languages input').on('click', function(el) {
-        var display = el.target.checked ? 'block' : 'none';
-        d3.selectAll('.' + el.target.value).style('display', display);
       });
       var fwks = [];
       // ext-js
@@ -168,11 +145,11 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
       // write background labels
       var initialOffset = 5;
       var bgTitles = [
-        { label: 'Technology Trigger', orientation: 'vertical' },
-        { label: 'Inflated Expectations', orientation: 'horizontal' },
-        { label: 'Disillusionment Trough', orientation: 'vertical' },
-        { label: 'Enlightenment Slope', orientation: 'vertical' },
-        { label: 'Productivity Plateau', orientation: 'horizontal' }
+        { label: 'Technology Trigger', orientation: 'vertical', align: 'top' },
+        { label: 'Inflated Expectations', orientation: 'horizontal', align: 'middle' },
+        { label: 'Disillusionment Trough', orientation: 'vertical', align: 'top' },
+        { label: 'Enlightenment Slope', orientation: 'vertical', align: 'top' },
+        { label: 'Productivity Plateau', orientation: 'horizontal', align: 'top' }
       ];
       bgTitles.forEach(function(title, i) {
         var vertical = title.orientation == 'vertical';
@@ -186,7 +163,8 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
         var br = txt.node().getBoundingClientRect();
         var p = {
           x: (cumulative(i) * pathWidth) + initialOffset + (vertical ? Math.ceil(br.width) : 0),
-          y: initialOffset + (vertical ? Math.ceil(br.height) : Math.ceil(br.height) )
+          y: title.align == 'top' ? initialOffset + Math.ceil(br.height)
+            : initialOffset  + Math.ceil( (height - br.height) * .7)
         };
         txt.attr('transform', 'translate(' + p.x + ', ' + p.y + ') ' + transform);
       });
@@ -227,13 +205,13 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
           .attr('class', 'd3-tip')
           .html(function(d) { return tipTemplate(d); })
           .direction('s')
-          .offset([-12, 0]);
+          .offset([12, 0]);
       svg.call(tip);
       order.forEach(function(group, i) {
         var bucket = circles.append('g')
             .attr('id', group);
         var offset = i == 0 ? 0 : offs[i-1];
-        var segment = (offs[i] - offset) / m[group].length;
+        var segment = (offs[i] - offset - 20) / m[group].length;
         //console.log('offset', offset, 'segment', segment, 'length', (pathWidth * splits[i]), 'gl', m[group].length);
         var dot = bucket.selectAll('.fwk')
             .data(m[group])
@@ -250,7 +228,7 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
               if ( d.id == 'wicket' ) {
                 console.log(d.id, angle);
               }
-              angle = angle > 115 || ( angle < 90 && (angle+5) > 90) ? angle - 180 : angle;
+              angle = angle > 114 || ( angle < 90 && (angle+5) > 90) ? angle - 180 : angle;
               return 'translate(' + p.x + ',' + p.y + ') rotate(' + angle.toFixed(2) + ', 0, 0)';
             })
             .on('mouseover', tip.show)
