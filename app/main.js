@@ -263,7 +263,7 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
           .attr("x", 25)
           .attr("y", 10)
           .style('font-weight', 'bold')
-          .style("font-size", "12px")
+          .style("font-size", "14px")
           .attr("fill", "#404040")
           .text("Legend");
 
@@ -290,16 +290,23 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
         .attr('y', function(d, i) { return i * 10 })
         .attr('width', 10)
         .attr('height', 10)
-        .style('stroke', '#ccc')
+        .style('stroke', '#404040')
         .style('fill', function(d, i) { return color(d) });
 
       g.append('text')
         .attr('data-value', 'checked')
         .attr('x', 15)
-        .attr('y', function(d, i) { return (i * 10) + 7 })
-        .attr("font-size", "11px")
-        .attr("fill", "#737373")
+        .attr('y', function(d, i) { return (i * 10) + 9 })
+        .attr("font-size", "12px")
+        .attr("fill", "#000")
         .html(function(d,i) { return filters[d] });
+
+      legend.append('text')
+        .attr('x', 15)
+        .attr('y', (filterKeys.length * 20) + 40)
+        .attr('font-size', '12px')
+        .attr('fill', '#737373')
+        .text('Click to toggle items');
 
 
     });
