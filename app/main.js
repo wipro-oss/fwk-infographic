@@ -33,6 +33,8 @@ require(['jquery', 'bootstrap', 'handlebars', 'd3', 'd3-tip'], function($, boots
     'web-components': 'Web Components',
     'micro-framework': '&mu; Frameworks'
   };
+  var footer = Handlebars.compile($('#footer-tmpl').html());
+  $('footer').html(footer({year: new Date().getFullYear() }));
   d3.csv('app/csv/fwk-infographic.csv')
     .get(function(err, rows) {
       if ( err ) throw err;
