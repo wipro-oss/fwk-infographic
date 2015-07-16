@@ -1,3 +1,5 @@
 dist
 app/vendor
 node_modules
+css/sprite.css
+css/sprite.png

@@ -4,5 +4,6 @@
   dir: "./dist",
   mainConfigFile: "app/main.js",
   name: "main",
-  optimizeCss: "standard"
+  optimizeCss: "standard",
+  fileExclusionRegExp: /^\.|^node_modules|^(build|gulpfile|package)\..*/
 })

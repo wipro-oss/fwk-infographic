@@ -11,6 +11,7 @@
     <link href="app/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="app/vendor/octicons/octicons/octicons.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet"/>
+    <link href="css/sprite.css" rel="stylesheet"/>
   </head>
 
   <body>
@@ -41,7 +42,7 @@
     </script>
     <script id="tip-tmpl" type="text/x-handlebars-template">
       <div class="tip bg-info">
-        <div><img alt="{{name}}" src="img/{{id}}.png"/></div>
+        <div><img title="{{name}}" class="sprite icon-{{id}}"/></div>
         <small class="text-muted">{{excerpt}}</small>
         {{#unless excerpt}}
         <small class="text-muted">{{description}}</small>
@@ -53,7 +54,7 @@
           {{#if releases}}<nobr><span class="octicon octicon-tag"></span> {{releases}}</nobr>{{/if}}
           {{#if openIssues}}<nobr><span class="octicon octicon-issue-opened"></span> {{openIssues}}</nobr>{{/if}}
           {{#if contributors}}<nobr><span class="octicon octicon-organization"></span> {{contributors}}</nobr>{{/if}}
-          {{#if stackoverflowQuestions}}<nobr><img src="img/stackoverflow.svg" height="20"> {{stackoverflowQuestions}}</nobr>{{/if}}
+          {{#if stackoverflowQuestions}}<nobr><img class="sprite icon-stackoverflow" style="height:20px"> {{stackoverflowQuestions}}</nobr>{{/if}}
           <nobr><span class="octicon octicon-zap"> {{score}}</span></nobr>
         </p>
       </div>

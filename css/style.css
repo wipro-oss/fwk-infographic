@@ -61,3 +61,6 @@
 .legend-item {
   cursor: pointer;
 }
+.sprite {
+  display: inline-block;
+}

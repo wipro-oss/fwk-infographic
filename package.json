@@ -1,0 +1,27 @@
+{
+  "name": "fwk-infographic",
+  "version": "1.0.0",
+  "description": "Plotting web application frameworks on the hype cycle. The frameworks are bucketed into the various phases and the position on the curve is determined by a score calculated as `((stars/2) + forks + (commits/releases) + (contributors * 10) - openIssues) + (stackoverflowQuestions * 0.8)`. ExtJS is a special case where the source is not available on github so, the github portion of the score is the average of all the other frameworks in the same phase.",
+  "main": "build.js",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp.spritesmith": "^3.8.2"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp.spritesmith": "^3.8.2"
+  },
+  "scripts": {
+    "spritegen": "gulp sprite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xshyamx/fwk-infographic.git"
+  },
+  "author": "shyam <shyamsundar.shanmugam@wipro.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xshyamx/fwk-infographic/issues"
+  },
+  "homepage": "https://github.com/xshyamx/fwk-infographic"
+}
