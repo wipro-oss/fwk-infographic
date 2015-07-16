@@ -7,6 +7,6 @@ Plotting web application frameworks on the hype cycle. The frameworks are bucket
 Requires NPM and bower.
 
      bower install
-     npm run spritegen
      npm install
+     npm run spritegen
      start index.html
