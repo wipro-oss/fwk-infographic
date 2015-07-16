@@ -6,10 +6,6 @@ r.js -o build.js
 echo -n 'cleaning up dist...'
 # cleanup dist
 cd dist
-# remove extraneous
-rm -fr .git .gitignore \
-   bower.json .bowerrc \
-   build.js build.sh build.txt
 
 rm -fr app/templates
 

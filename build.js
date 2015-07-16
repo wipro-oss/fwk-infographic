@@ -5,5 +5,5 @@
   mainConfigFile: "app/main.js",
   name: "main",
   optimizeCss: "standard",
-  fileExclusionRegExp: /^\.|^node_modules|^(build|gulpfile|package)\..*/
+  fileExclusionRegExp: /^\.|^node_modules|^(build|gulpfile|package|bower)\..*/
 })
